@@ -34,11 +34,13 @@ class ViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss EE"
         timelbl.text = formatter.string(from: date)
+        //timelbl.text = String(describing: date)
     }
     
     @IBAction func timeStart(_ sender: Any) {
         if timeSwitch.isOn == true {
             
+            //closure 사용
             myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {(myTimer) in self.updateTime()
                 
             })
