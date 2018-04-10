@@ -17,7 +17,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        
+        timeSwitch.setOn(false, animated: true)
+        
+        //myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
 
@@ -26,13 +29,23 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @objc func updateTime() {
+     func updateTime() {
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss EE"
         timelbl.text = formatter.string(from: date)
     }
-
-
+    
+    @IBAction func timeStart(_ sender: Any) {
+        if timeSwitch.isOn == true {
+            
+            myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {(myTimer) in self.updateTime()
+                
+            })
+        } else {
+            myTimer.invalidate()
+        }
+    }
+    
 }
 
